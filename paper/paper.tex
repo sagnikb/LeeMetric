@@ -1,0 +1,144 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[style=authortitle]{biblatex}
+\bibliography{references}
+\usepackage[scale = 0.80]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{stmaryrd}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{appendix}
+\usepackage{blindtext}
+%\usepackage{savetrees}
+\usepackage{cleveref}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{}
+\lhead{Size of Lee ball}
+\rfoot{\thepage}
+
+\crefname{equation}{}{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cB}{\mathcal{B}}
+
+\date{November 2018}
+
+\begin{document}
+
+The Lee distance between two symbols $i$ and $j$ in the $q$-ary alphabet $\{0, 1, \ldots, q-1\}$ is defined as $\min(\lvert i-j \rvert, q - \lvert i - j \rvert)$, and the distance between two strings on the same alphabet is given by the sum of the Lee distances between the individual components. Let the maximum distance between two symbols be $\alpha$; in terms of $q$ this can be written $\alpha = \lfloor \frac{q}{2}\rfloor$. When $q$ is even, then for a given symbol there is only one symbol with the maximum Lee distance, and if $q$ is  odd there are two such symbols. 
+
+The number of vectors of length $n$ with Hamming weight $w$ and Lee weight $w'$ is given by the coefficient of $x^{w'}$ in $\binom{n}{w}(1 + 2x + 2x^2 +\ldots + 2x^\alpha)^w$ when $q$ is odd or in $\binom{n}{w}(1 + 2x + 2x^2 +\ldots + 2x^{\alpha-1} + x^\alpha)^w$. If we sum over all Hamming weights, then the number of vectors of length $n$ with Lee weight $w'$ is given by the coefficient of $x^{w'}$ in the sum 
+\begin{equation}\label{q-odd generating equation}
+\sum_{i = 0}^{n} \binom{n}{i}(2x + 2x^2 +\ldots + 2x^\alpha)^i = (1 + 2x + 2x^2 +\ldots + 2x^\alpha)^n
+\end{equation}
+when $q$ is odd or in 
+\begin{equation}\label{q-even generating equation}
+\sum_{i = 0}^{n} \binom{n}{i}(1 + 2x + 2x^2 +\ldots + 2x^{\alpha - 1} + x^\alpha)^i = (1 + 2x + 2x^2 +\ldots + 2x^{\alpha-1} +x^\alpha)^n
+\end{equation}
+if $q$ is even. Clearly, then, the number of vectors with Lee weight less than or equal to $w'$ is the sum of the coefficients of $x^i$ for $0\leq i \leq w'$, and to find the radius of the Lee ball of a given radius, we need to find this sum. 
+
+Consider $p = \theta(1)$, and consider the Lee ball of radius $pn$. The assumption $p = \theta(1)$ is to remove from consideration the cases when the Lee radius is a small constant number, which can happen,for example, when $p = O(\frac{1}{n})$.
+
+\medskip
+
+\begin{lemma}\label{mean and variance lemma}
+    Let $q \geq 2$ be an integer. Let a random variable $X$ be defined on the set $\mathcal{X} = \{0, 1, \ldots, \alpha\}$ where $\alpha = \lfloor \frac{q}{2} \rfloor$, such that $X$ takes value $0$ with probability $\frac{1}{q}$, values $2,3, \ldots, \alpha-1$  with probability $\frac{2}{q}$ each, and $\alpha$ with probability $\frac{1}{q}$ if $q$ is even and $\frac{2}{q}$ if $q$ is odd. Then, the mean and variance of $X$ is given by
+    \begin{equation}
+        \mu = \begin{cases}
+            \frac{q}{4} & \text{$q$ is even}\\
+            \frac{q^2 -1}{4q} & \text{$q$ is odd}
+        \end{cases}
+    \end{equation}
+    \begin{equation}
+        \sigma^2 = \begin{cases}
+            \frac{q^2 + 8}{48} & \text{$q$ is even}\\
+            \frac{(q+1)(q-1)(q^2 + 3)}{48q^2} & \text{$q$ is odd}
+        \end{cases}
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    Proof follows from straightforward calculation and is omitted.
+\end{proof}
+
+\begin{theorem}[Location and Value of maximum coefficient in the expansion] \label{max coefficient}
+    In the above expression \cref{q-odd generating equation} for the odd case and \cref{q-even generating equation} for the even case, the maximum coefficient occurs respectively for $\frac{q^2-1}{4q}n$ and $\frac{q}{4}n$, for large enough $n$.
+\end{theorem}
+
+\begin{proof}
+    Consider the polynomial 
+    \begin{equation}\label{define ais}
+        (1 + 2x + 2x^2 +\ldots + 2x^{\alpha-1} + jx^\alpha)^n = \sum_{i = 0}^{\alpha n} a_i x^i 
+    \end{equation}
+    where $j$ is $1$ or $2$ as the case may be. Write the polynomial as 
+    \begin{equation}\label{define bis}
+        \left(\frac{1}{q} + \frac{2}{q}x + \frac{2}{q}x^2 +\ldots + \frac{2}{q}x^{\alpha-1} + \frac{j}{q}x^\alpha\right)^n = \sum_{i = 0}^{\alpha n} b_i x^i 
+    \end{equation}
+    Let $X_1, \ldots, X_n$ be iid random variables, such that each $X_i$ takes value $0$ with probability $\frac{1}{q}$, $1$ with probability $\frac{2}{q}$, $3$ with probability $\frac{2}{q}$ and so on, and finally $\alpha$ with probability $\frac{1}{q}$ or $\frac{2}{q}$ for the even case and the odd case respectively. Note that for each $k$,
+    \begin{equation}
+        \mathbb{P}\left[\sum_{i = 0}^{n}x_i = k\right] = b_k
+    \end{equation}
+    Using the Chernoff bounds, the value of $k$ that maximises the quantity $\mathbb{P}\left[\sum_{i = 0}^{n}x_i = k\right]$ is the $k = \mathbb{E}\left[\sum_{i = 0}^{n}x_i\right]$. Note that each $X_i$ is precisely the random variable defined in \cref{mean and variance lemma}, and therefore the maximum is at $k = \frac{q^2-1}{4q}n$ or $\frac{q}{4}n$ according as $q$ is odd or even.
+\end{proof}
+
+\begin{theorem}
+    The coefficients $b_i$ in the expansion \cref{define bis} are well approximated by a Gaussian of mean $\frac{q^2-1}{4q}n$ and standard deviation $\frac{1}{4q}\sqrt{\frac{(q+1)(q-1)(q^2 + 3)}{3}}\sqrt{n}$ for the odd case and of mean $\frac{q}{4}n$ and standard deviation $\frac{1}{4}\sqrt{\frac{q^2 + 8}{3}}\sqrt{n}$, for large enough $n$.
+\end{theorem}
+
+\begin{proof}
+    Let $S_n = \frac{1}{n}\sum_{i=1}^{n} X_i$, and $X_i$'s are iid, as used in the proof of \cref{max coefficient}. By the central limit theorem, the distribution of $S_n$ approaches $\mathcal{N}(\mu, \frac{\sigma^2}{n})$ for large $n$, where $\mu$ and $\sigma$ are the mean and variance of the individual $X_i$'s. Therefore the random variable $nS_n$ approaches $\mathcal{N}(\mu n, n\sigma^2)$ in distribution for large $n$. The coefficients $b_i$ give the probability that $nS_n$ takes the value $i$. The values of $\mu$ and $\sigma$ are as in \cref{mean and variance lemma}.
+\end{proof}
+
+\textbf{Show that the convergence is from above!!!}
+
+\begin{theorem}
+    For large $n$, $b_{pn}$ in the expansion \cref{define bis} is upper bounded by
+    \begin{equation}
+        b_{pn} = \begin{cases}\sqrt{\frac{24}{\pi n (q^2 + 8)}} e^{-\frac{3}{2(q^2 + 8)}(4p - q)^2 n} & \text{even $q$}\\
+        \sqrt{\frac{24q^2}{\pi n (q^2 - 1)(q^2 + 3)}} e^{-\frac{3}{2(q^2 - 1)(q^2 + 3)}(4pq - q^2 + 1)^2 n} & \text{odd $q$}
+        \end{cases}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    The result follows immediately by calculating the value of $\mathcal{N}(\mu n, n \sigma^2)$ at $x = pn$ and simplifying.
+\end{proof}
+
+\begin{corollary}
+    For large $n$, $a_{pn}$ in the expansion \cref{define ais} is upper bounded by 
+    \begin{equation}
+        a_{pn} = \begin{cases}\sqrt{\frac{24}{\pi n (q^2 + 8)}} e^{-\frac{3}{2(q^2 + 8)}(4p - q)^2 n} q^n & \text{even $q$}\\
+        \sqrt{\frac{24q^2}{\pi n (q^2 - 1)(q^2 + 3)}} e^{-\frac{3}{2(q^2 - 1)(q^2 + 3)}(4pq - q^2 + 1)^2 n} q^n & \text{odd $q$}
+        \end{cases}
+    \end{equation}
+\end{corollary}
+
+Let the maxmimum $a_{pn}$ occur for $p = p^*$, for some fixed $n$. Because the $a_{pn}$ decay exponentially away from the central maximum for $p < p^*$ the sum $\sum_{i = 0}^{pn}a_i$ is equal to $a_{pn}$, upto first order in the exponent. The coefficient $a_{pn}$, and therefore the sum $\sum_{i = 0}^{pn}a_i$, upto first order in the exponent, is then upper bounded by
+$$
+    a_{pn} \leq q^{n\left(1- \frac{c(p,q)}{\ln q}\right) - o(n)}
+$$ 
+where
+\begin{equation}
+    c(p,q) = \begin{cases} {\frac{3}{2(q^2 + 8)}(4p - q)^2} & \text{even $q$}\\
+    {\frac{3}{2(q^2 - 1)(q^2 + 3)}(4pq - q^2 + 1)^2} & \text{odd $q$}
+    \end{cases}
+\end{equation}
+
+
+\end{document}
