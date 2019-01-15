@@ -49,7 +49,7 @@ def kl(p, generator):
 	for lamb in np.linspace(0, 5, 100):
 		X1.append(lamb)
 		Y1.append(kllamb(p, lamb, generator))
-	return(kllamb(p, 4*(mean-p)*(mean-p), generator))
+	#return(kllamb(p, 4*(mean-p)*(mean-p), generator))
 	return(np.max(Y1))
 	
 	#lamb = f(p, 4.6654909, 2.95935776)

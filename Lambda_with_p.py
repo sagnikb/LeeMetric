@@ -85,6 +85,7 @@ Z = []
 for p in np.linspace(0, mean, 1000):
 	X.append(p)
 	Y.append(kl(p, generator))
+	#Z.append(4*(mean-p)*(mean-p))
 	#Z.append(f(p, parameters[0][0], parameters[0][1])+0.1)
 	#Y.append(np.log(kl(p,generator)))
 
