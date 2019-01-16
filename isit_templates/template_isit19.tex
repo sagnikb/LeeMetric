@@ -32,6 +32,7 @@
 \usepackage{ifthen}
 \usepackage{cite}
 \usepackage[cmex10]{amsmath} % Use the [cmex10] option to ensure complicance
+\usepackage{amssymb}
                              % with IEEE Xplore (see bare_conf.tex)
 
 %% Please note that the amsthm package must not be loaded with
@@ -118,7 +119,7 @@
 %% to remove this comment!
 %%
 \begin{abstract}
-  We give a generalization of the Fourier analytic proof of the binary Linear Programming bound due to Navon and Samorodnitsky to more general channels - the q-ary Hamming metric and the Lee metric, for codes that are closed under inverses. We also derive a numerical bound on the size of the Lee ball of a given radius. 
+  We develop general techniques to bound the size of the balls of a given radius $r$ for $q$-ary discrete metrics, that reduces to the known bound in the case of the Hamming metric and gives us a new bound in the case of the Lee metric. We use the techniques developed to find a Hamming (or sphere-packing) bound for the Lee metric. 
 \end{abstract}
 
 
@@ -132,69 +133,17 @@
 
 \section{Introduction}
 \subsection{Background}
-Much of information theory involves studying the limits of reliable communication over a channel, using well-designed codes. We can use various metrics defined on the codeword space that are matched to the channel under consideration, where we say that a metric is matched to a channel if nearest neighbour decoding in the codeword space implies ML decoding on the channel. The most well studied metric is the Hamming metric, and we know a lot about this metric. In the random noise model (or asymptotic reliability setting), we have a precise characterisation of the capacity of the channel, with any rate below capacity being achievable and the probability of error going to zero asymptotically, and conversely, any rate above capacity implying that the probability of error goes asymptotically to one. We also know the rate at which the probability goes to one (error exponents), computationally efficient codes coming close to capctity for many channels etc. For adversarial noise (zero-error information theory) the capacity is not precisely known, as the best known upper bound (the second LP bound) and the best know lower bound (the GV bound) on the achievable rates do not match. 
+Much of information theory involves studying the limits of reliable communication over a channel, using well-designed codes. We can use various metrics defined on the codeword space that are matched to the channel under consideration, where we say that a metric is matched to a channel if nearest neighbour decoding in the codeword space implies ML decoding on the channel. The most well studied metric is the Hamming metric. For zero-error information theory in the Hamming metric, we have several upper and lower bounds like the Gilbert-Varshamov bound, the Plotkin bound, the Hamming bound, the Elias-Bassalygo bound, the Linear Programming (or MRRW) bound etc that tell us what rates are possible and what are not, given an error criterion that the code is to meet, even though the question of what is the precise capacity is still open. Almost all of these bounds require an estimate of the number of codewords of a certain Hamming weight, the size of the Hamming ball of the given radius, and the standard known result is that this size is $q^{nH(r/n)}$ to first order in the exponent. 
 
-There are other metrics of interest too, for example the Lee metric. Substantially less is known about the Lee metric than about the Hamming metric case, even though there has been a lot of work on this metric, for example...
+There are other metrics of practical and mathematical interest, for example the Lee metric or the Manhattan (or taxi-cab) metric, for which general bounds of this kind on the size of a ball of a given radius in the metric are not known, and yet if we are to hope to develop bounds analogous to the Hamming bound, we must first bound this quantity.
 
 \subsection{Prior work}
 
 
+\subsection{Our contributions}
+We develop two general techniques based on the generaing function of a metric that can hopefully be extended to any discrete metric on $\mathbb{F}_q$. We show that we can recover the familiar result for the Hamming metric through this method, and we use it to find a bound for the Lee metric. We use these results to find bounds on the possible rates in the case of the Lee metric.
 
-
-submitted online at
-\begin{center}
-  \url{http://isit2019.fr/Papers.asp}
-\end{center}
-The deadline for registering the paper and uploading the manuscript is \textbf{January 13, 2019}.
-
-The papers are restricted in length to \textbf{five pages} (including
-figures, references, etc.) in the IEEEtran-conference style as
-presented here.
-
-Each paper must be classified as ``eligible for student paper award''
-or ``not eligible for student paper award''. \textbf{Do not include any text concerning the student paper award in the abstract or manuscript.}
-
-
-\section{Submission of Accepted Papers}
-
-Accepted papers will be published in full (up to five pages in
-length). A program booklet and a book of abstracts will also be
-distributed at the Symposium to serve as a guide to the sessions.
-
-The deadline for the submission of the final camera-ready paper will
-be announced in due course.  Accepted papers not submitted by that
-date will not appear in the ISIT proceedings and will not be included
-in the technical program of the ISIT.
-
-
-\section{Paper Format}
-
-\subsection{Templates}
-
-The paper (A4 or letter size, double-column format, not exceeding
-5~pages) should be formatted as shown in this sample \LaTeX{} file
-\cite{Laport:LaTeX, GMS:LaTeXComp, oetiker_latex, typesetmoser}.
-
-The use of Microsoft Word instead of \LaTeX{} is strongly
-discouraged. However, acceptable formatting may be achieved by using
-the template that can be downloaded from the ISIT 2019 website:
-\begin{center}
-  \url{http://isit2019.fr/}
-\end{center}
-
-Users of other text processing systems should attempt to duplicate the
-style of this example, in particular the sizes and type of font, as
-closely as possible.
-
-
-\subsection{Formatting}
-
-The style of references, equations, figures, tables, etc., should be
-the same as for the \emph{IEEE Transactions on Information
-  Theory}. The source file of this template paper contains many more
-instructions on how to format your paper. So, example code for
-different numbers of authors, for figures and tables, and references
-can be found (they are commented out).
+\section{Problem Setup and Notation}
 
 %%%%%%
 %% An example of a floating figure using the graphicx package.
@@ -259,34 +208,8 @@ can be found (they are commented out).
 %%%%%%
 
 
-For instructions on how to typeset math, in particular for equation
-arrays with broken equations, we refer to \cite{typesetmoser}.
-
-Pages should not be numbered and there should be no footer or header
-(both will be added during the production of the proceedings). The
-affiliation shown for authors should constitute a sufficient mailing
-address for persons who wish to write for more details about the
-paper.
-
-
-\subsection{PDF Requirements}
-
-Only electronic submissions in form of a PDF file will be
-accepted. The PDF file has to be PDF/A compliant. A common problem is
-missing fonts. Make sure that all fonts are embedded. (In some cases,
-printing a PDF to a PostScript file, and then creating a new PDF with
-Acrobat Distiller, may do the trick.) More information (including
-suitable Acrobat Distiller Settings) is available from the IEEE
-website \cite{IEEE:pdfsettings, IEEE:AuthorToolbox}.
-
-
 \section{Conclusion}
 
-We conclude by pointing out that on the last page the columns need to
-balanced. Instructions for that purpose are given in the source file.
-
-Moreover, example code for an appendix (or appendices) can also be
-found in the source file (they are commented out).
 
 %%%%%%
 %% Appendix:
@@ -303,9 +226,6 @@ found in the source file (they are commented out).
 
 
 \section*{Acknowledgment}
-
-We are indebted to Michael Shell for maintaining and improving
-\texttt{IEEEtran.cls}. 
 
 
 %%%%%%
