@@ -133,17 +133,26 @@
 
 \section{Introduction}
 \subsection{Background}
-Much of information theory involves studying the limits of reliable communication over a channel, using well-designed codes. We can use various metrics defined on the codeword space that are matched to the channel under consideration, where we say that a metric is matched to a channel if nearest neighbour decoding in the codeword space implies ML decoding on the channel. The most well studied metric is the Hamming metric. For zero-error information theory in the Hamming metric, we have several upper and lower bounds like the Gilbert-Varshamov bound, the Plotkin bound, the Hamming bound, the Elias-Bassalygo bound, the Linear Programming (or MRRW) bound etc that tell us what rates are possible and what are not, given an error criterion that the code is to meet, even though the question of what is the precise capacity is still open. Almost all of these bounds require an estimate of the number of codewords of a certain Hamming weight, the size of the Hamming ball of the given radius, and the standard known result is that this size is $q^{nH(r/n)}$ to first order in the exponent. 
+Much of channel information theory involves studying the limits of reliable communication over a channel, using well-designed codes. We can use various metrics defined on the codeword space that are matched to the channel under consideration, where we say that a metric is matched to a channel if nearest neighbour decoding in the codeword space implies ML decoding on the channel. The most well studied metric is the Hamming metric. For zero-error information theory in the Hamming metric, we have several upper and lower bounds like the Gilbert-Varshamov bound, the Plotkin bound, the Hamming bound, the Elias-Bassalygo bound, the Linear Programming (or MRRW) bound etc that tell us what rates are possible and what are not, given an error criterion that the code is to meet, even though the question of what is the precise capacity is still open. Almost all of these bounds require an estimate of the number of codewords of a certain Hamming weight, the size of the Hamming ball of the given radius, and the standard known result is that this size is $q^{nH(r/n)}$ to first order in the exponent. 
 
-There are other metrics of practical and mathematical interest, for example the Lee metric or the Manhattan (or taxi-cab) metric, for which general bounds of this kind on the size of a ball of a given radius in the metric are not known, and yet if we are to hope to develop bounds analogous to the Hamming bound, we must first bound this quantity.
+There are other metrics of practical and mathematical interest, for example the Lee metric or the Manhattan (or taxi-cab) metric, for which general bounds of this kind on the size of a ball of a given radius in the metric are not known, and yet if we are to hope to develop bounds analogous to the Hamming bound, we must first start with a bound on this quantity.
 
 \subsection{Prior work}
 
 
-\subsection{Our contributions}
+\subsection{Our contributions and structure of the paper}
 We develop two general techniques based on the generaing function of a metric that can hopefully be extended to any discrete metric on $\mathbb{F}_q$. We show that we can recover the familiar result for the Hamming metric through this method, and we use it to find a bound for the Lee metric. We use these results to find bounds on the possible rates in the case of the Lee metric.
 
 \section{Problem Setup and Notation}
+We adopt a slightly modified version of the notation and terminology of \cite{berlekamp}. The discrete metric under consideration gives the distance between any two points in the space of $n$-length vectors over an alphabet of $q$ symbols. Given a center $C$ and a radius $r$, define the sphere $\mathcal{S}(C,t)$ as the set of all points whose distance from $C$ is $\leq t$. The surface area of such a sphere is the number of vectors whose distance from $C$ is exactly $r$ and it is denoted by $A_t^{(n)}$. The volume of such a sphere is the number of vectors whose distance from $C$ is $\leq r$, and it is denoted as $V_t^{(n)}$. Clearly, we have the equality $V_r^{(n)} = \sum_{i = 0}^r A_i^{(n)}$. Now, let $A^{(n)}(z) = \sum_{i} A_i^{(n)} z^i$, the generating function for the $A_i^{(n)}$. Since the distance is additive over the $n$ coordinates, the generating function is multiplicative over these coordinates, and we have the equality $A^{(n)}(z) = [A^{(1)}(z)]^n$, where $A^{(1)}(z)$ gives the weights for a single symbol only. For example, for the Hamming metric we have $A^{(1)}(z) = 1 + (q-1)z$, and for the Lee metric we have
+\begin{equation*}
+  A^{(1)}(z) = \begin{cases}
+    1 + 2z + 2z^2 + \ldots + 2z^{\frac{q-1}{2}} & \text{for odd $q$} \\
+    1 + 2z + 2z^2 + \ldots + 2z^{\frac{q-2}{2}} + z^{\frac{q}{2}} & \text{for even $q$} \\
+  \end{cases}
+\end{equation*}
+
+
 
 %%%%%%
 %% An example of a floating figure using the graphicx package.
