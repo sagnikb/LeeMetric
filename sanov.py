@@ -6,7 +6,7 @@ from scipy.stats import norm
 from scipy.stats import entropy
 import math
 
-q = 4
+q = 10
 alpha = int(np.floor(q/2))
 blocklength = 200
 

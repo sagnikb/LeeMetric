@@ -54,44 +54,39 @@ def kllamb(p, lamb, generator):
 def kl(p, generator):
 	X1 = []
 	Y1 = []
-	for lamb in np.linspace(0, 5, 500):
+	for lamb in np.linspace(0, 8, 1000):
 		X1.append(lamb)
 		Y1.append(kllamb(p, lamb, generator))
 	#return(np.max(Y1))
 	return(X1[np.argmax(Y1)])
 
-X = []
-Y = []
-Z = []
-'''
-def f(p, a, b):
-	return(a*np.float_power(p, 1/b) - 5)
+def f(p, a):
+	return(a*np.float_power(p, 1/q) - a*np.float_power(mean, 1/q))
+	return(a*np.float_power(p, 1/b) - a*np.float_power(mean, 1/b))
 
-for p in np.linspace(0.1, mean, 1000):
-	X.append(p)
-	Y.append(-kl(p, generator))
-	#Y.append(np.log(kl(p,generator)))
-
-parameters = curve_fit(f, X, Y)
-'''
-'''
-for p in X:
-	Z.append(f(p, parameters[0][0], parameters[0][1]))
-'''
 X = []
 Y = []
 Z = []
 
-for p in np.linspace(0, mean, 1000):
+for p in np.linspace(0.1, mean, 100):
 	X.append(p)
 	Y.append(kl(p, generator))
 	#Z.append(4*(mean-p)*(mean-p))
 	#Z.append(f(p, parameters[0][0], parameters[0][1])+0.1)
 	#Y.append(np.log(kl(p,generator)))
+	print(p)
+'''
+def f(p, a):
+	return(a*(p-mean)*(p-mean))
+	#return(b*np.exp(-p*a) - b*np.exp(-mean*a))
+'''
+parameters = curve_fit(f, X, Y)
 
+print(parameters[0][0])
 
-#print(parameters[0])
+for p in X:
+	Z.append(f(p, parameters[0][0]))
 
 plt.plot(X, Y, 'b')
-#plt.plot(X, Z, 'g')
+plt.plot(X, Z, 'g')
 plt.show()
