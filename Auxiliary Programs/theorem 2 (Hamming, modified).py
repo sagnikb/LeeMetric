@@ -1,7 +1,9 @@
 '''
 This program verifies theorem 2 as stated in the Hamming metric case.
 The blue graph is the expected plot, and the green one is the lower bound
-Clearly, the bound holds. Since we are have taken, at one point, that M = \sqrt(n), the bound does not work for small r where r is smaller than M. Can be avoided by taking r = O(n)
+Clearly, the bound holds. Since we are have taken, at one point, that M = \sqrt(n), 
+the bound does not work for small r where r is smaller than M. 
+Can be avoided by taking r = O(n)
 '''
 import numpy as np
 import matplotlib.pyplot as plt
@@ -154,12 +156,11 @@ for r in range(3, int(blocklength*mean - 50)):
     print(r)
     R.append(r)
     data.append(fAf/ff)
-    #approx.append((2*(M-1)*np.sqrt(q-1)*(np.sqrt(r*(blocklength - r)) - M)+(q-2)*(M-1)*(r - M))/M)
 
 print(data)
 
 plt.plot(R, data, 'b')
-#plt.plot(R, approx, 'g')
+plt.plot(R, approx, 'g')
 
 
 plt.show()

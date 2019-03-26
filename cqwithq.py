@@ -29,6 +29,7 @@ def generator(q):
 ######################
 # Mean for a given q #
 ######################
+
 def mean(q):
 	if q%2 == 0:
 		mean = q/4
